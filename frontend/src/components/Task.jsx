@@ -14,6 +14,7 @@ function Task(props) {
         changeIsChecked((iC) => !iC);
     }
 
+
     return (
         <li className="task pb-3">
             <div className="flex items-center justify-between">
@@ -32,8 +33,19 @@ function Task(props) {
                     </p>
                 </div>
                 <div id="actions">
-                    <FontAwesomeIcon className='w-10 h-10 px-5' size='lg' icon={faTrash} color='#001c58' />
-                    <FontAwesomeIcon icon={faEdit} size='lg' color='#001c58'/>
+                    <FontAwesomeIcon
+                        className='w-10 h-10 px-5' 
+                        size='lg' 
+                        icon={faTrash} 
+                        color='#001c58' 
+                        onClick={(ele) => props.onDelete(ele)}
+                    />
+                    <FontAwesomeIcon 
+                        icon={faEdit} 
+                        size='lg' 
+                        color='#001c58'
+                        onClick={(ele) => props.onEdit(ele,props.taskName)}
+                    />
                 </div>
             </div>
         </li>
