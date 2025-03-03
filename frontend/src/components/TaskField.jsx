@@ -9,8 +9,19 @@ function TaskField(props){
     }
 
     function onClick(){
-        props.onAddClick(taskName);
-        setTaskName((tn) => "");
+        if(taskName.trim() !== ""){
+            props.onTaskAdd(taskName.trim());
+            setTaskName((tn) => "");
+        }
+    }
+
+    function onEnterKeyDown(event){
+        if(taskName.trim() !== ""){
+            if(event.key === "Enter"){
+            props.onTaskAdd(taskName.trim());
+                setTaskName((tn) => "");
+            }
+        }
     }
 
     return(
@@ -20,6 +31,7 @@ function TaskField(props){
                 placeholder="Enter the task"
                 value={taskName}  
                 onChange={(ele) => onChange(ele)}
+                onKeyDown={(e) => onEnterKeyDown(e)}
             />
             <button className="bg-[#fe633d] rounded-r-4xl lg:text-xl md:text-lg sm:text-sm lg:p-3 md:p-2 sm:p-2 text-white w-[13%]" onClick={onClick}>Add</button>
         </div>

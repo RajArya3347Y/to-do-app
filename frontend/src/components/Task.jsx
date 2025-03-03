@@ -38,7 +38,7 @@ function Task(props) {
                         size='lg' 
                         icon={faTrash} 
                         color='#001c58' 
-                        onClick={(ele) => props.onDelete(ele)}
+                        onClick={(ele) => props.onDelete(ele,props.taskName)}
                     />
                     <FontAwesomeIcon 
                         icon={faEdit} 
