@@ -8,11 +8,46 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 function Task(props) {
 
-    const [isChecked,changeIsChecked] = useState(false);
+    const taskName = props.taskName;
+
+    const [isChecked,setIsChecked] = useState(false);
+    const [isEditing,setIsEditing] = useState(false);
+
+    const [editedName,setEditedName] = useState(taskName);
+
+    // elements
+    const taskPara = <p
+        className="text-[#001c58] text-xl inline"
+        style={{ textDecoration: isChecked ? "line-through" : "none" }}
+    >
+        {taskName}
+    </p>
+
+    const editField = <input
+        className='outline-0' 
+        type="text" 
+        autoFocus={true}
+        onKeyDown={(event) => {
+            if(event.key === "Enter"){
+                onEditClick()
+            }
+        }}
+        value={editedName}
+        onChange={(ele) =>
+            setEditedName(ele.target.value)
+        } 
+    />
 
     function changeTaskCompleted(ele){
-        changeIsChecked((iC) => !iC);
+        setIsChecked((iC) => !iC);
     }
+
+    function onEditClick(){
+        setIsEditing((ie) => !ie);
+        props.getEditedName(taskName,editedName);
+    }
+
+
 
 
     return (
@@ -25,12 +60,8 @@ function Task(props) {
                         name="task-completed" 
                         id="task-check" 
                     />
-                    <p 
-                        className="text-[#001c58] text-xl inline"
-                        style={{textDecoration: isChecked ? "line-through" : "none"}   }
-                    >
-                        {props.taskName}
-                    </p>
+                    {isEditing ? editField : taskPara}
+                    
                 </div>
                 <div id="actions">
                     <FontAwesomeIcon
@@ -38,13 +69,13 @@ function Task(props) {
                         size='lg' 
                         icon={faTrash} 
                         color='#001c58' 
-                        onClick={(ele) => props.onDelete(ele,props.taskName)}
+                        onClick={(ele) => isEditing? null: props.onDelete(ele,taskName)}
                     />
                     <FontAwesomeIcon 
                         icon={faEdit} 
                         size='lg' 
                         color='#001c58'
-                        onClick={(ele) => props.onEdit(ele,props.taskName)}
+                        onClick={(ele) => onEditClick()}
                     />
                 </div>
             </div>
