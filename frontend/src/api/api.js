@@ -19,8 +19,13 @@ async function addTask(title) {
     }
 }
 
-async function editTask(title, isCompleted) {
-
+async function editTask(title, updatedTitle, isCompleted) {
+    try {
+        await axios.patch(`/api/${title}`,{newTitle:updatedTitle,isCompleted:isCompleted})
+        await getTasks();
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function deleteTask(title) {

@@ -7,7 +7,7 @@ async function getTasks(_req,res) {
         console.log(error);
     }
 }
-
+  
 async function addTask(req,res) {
     try {
         const task = new taskModel({

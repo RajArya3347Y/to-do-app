@@ -24,8 +24,9 @@ function QuizApp() {
         deleteTask(name)
     }
 
-    function getEditedName(taskName, editedName) {
+    function getEditedName(taskName, editedName,isChecked) {
         setTasks((t) => t.map((task) => (task === taskName ? editedName : task)))
+        editTask(taskName,editedName);
     }
 
     return (
@@ -39,7 +40,9 @@ function QuizApp() {
                         taskName={task}
                         key={index}
                         onDelete={(ele, name) => onTaskDelete(ele, name)}
-                        getEditedName={(taskName, editedName) => getEditedName(taskName, editedName)}
+                        getEditedName={(taskName, editedName,isChecked) => 
+                            getEditedName(taskName, editedName,isChecked)
+                        }
                     />
                 ))}
             </ul>
