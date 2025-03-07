@@ -26,6 +26,4 @@ dist-ssr
 *.sw?
 
 # the folder used for temp server till being added to main server
-server/
 .env
-server.js
