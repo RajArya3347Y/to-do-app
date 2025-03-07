@@ -10,6 +10,16 @@ async function getTasks() {
     }
 }
 
+async function getIsCompleted(title) {
+    try {
+        const response = await axios.get(`/api/${title}`)
+        const data = response.data[0].isCompleted
+        return data
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function addTask(title) {
     try {
         await axios.post(`/api/${title}`);
@@ -37,4 +47,4 @@ async function deleteTask(title) {
     }
 }
 
-export { getTasks, deleteTask, editTask, addTask };
+export { getTasks, deleteTask, editTask, addTask ,getIsCompleted};

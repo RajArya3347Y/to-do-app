@@ -7,6 +7,16 @@ async function getTasks(_req,res) {
         console.log(error);
     }
 }
+
+async function getIsCompleted(req,res) {
+    try {
+        const title = req.params.title;
+        res.json(await taskModel.find({title:title}))
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
   
 async function addTask(req,res) {
     try {
@@ -43,4 +53,4 @@ async function updateTask(req,res) {
     }
 }
 
-module.exports = {addTask,getTasks,deleteTask,updateTask}
+module.exports = {addTask,getTasks,deleteTask,updateTask,getIsCompleted}
