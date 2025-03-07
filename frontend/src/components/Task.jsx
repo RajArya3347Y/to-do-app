@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Font Awesome Imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
+import { editTask, getIsCompleted, getTasks } from '../api/api';
 
 
 function Task(props) {
@@ -14,6 +16,12 @@ function Task(props) {
     const [isEditing,setIsEditing] = useState(false);
 
     const [editedName,setEditedName] = useState(taskName);
+
+    useEffect(() => {
+        (async function() {
+            setIsChecked(await getIsCompleted(taskName));  
+        })();
+    },[])
 
     // elements
     const taskPara = <p
@@ -40,11 +48,12 @@ function Task(props) {
 
     function changeTaskCompleted(ele){
         setIsChecked((iC) => !iC);
+        editTask(taskName, editedName, !isChecked)
     }
 
     function onEditClick(){
         setIsEditing((ie) => !ie);
-        props.getEditedName(taskName,editedName);
+        props.getEditedName(taskName,editedName,isChecked);
     }
 
 
@@ -59,6 +68,7 @@ function Task(props) {
                         onChange={(ele) => changeTaskCompleted(ele)} 
                         name="task-completed" 
                         id="task-check" 
+                        checked={isChecked}
                     />
                     {isEditing ? editField : taskPara}
                     
