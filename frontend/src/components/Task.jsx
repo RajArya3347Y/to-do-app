@@ -46,7 +46,7 @@ function Task(props) {
         } 
     />
 
-    function changeTaskCompleted(ele){
+    function changeTaskCompleted(){
         setIsChecked((iC) => !iC);
         editTask(taskName, editedName, !isChecked)
     }
@@ -65,7 +65,7 @@ function Task(props) {
                 <div id="task">
                     <input className="mr-4 rounded-3xl w-4 h-4" 
                         type="checkbox" 
-                        onChange={(ele) => changeTaskCompleted(ele)} 
+                        onChange={changeTaskCompleted} 
                         name="task-completed" 
                         id="task-check" 
                         checked={isChecked}
@@ -85,7 +85,7 @@ function Task(props) {
                         icon={faEdit} 
                         size='lg' 
                         color='#001c58'
-                        onClick={(ele) => onEditClick()}
+                        onClick={onEditClick}
                     />
                 </div>
             </div>

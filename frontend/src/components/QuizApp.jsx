@@ -19,7 +19,7 @@ function QuizApp() {
         addTask(val);
     }
 
-    function onTaskDelete(ele, name) {
+    function onTaskDelete(name) {
         setTasks((t) => t.filter((val, i) => val !== name));
         deleteTask(name)
     }
