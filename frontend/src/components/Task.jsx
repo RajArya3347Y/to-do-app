@@ -25,14 +25,14 @@ function Task(props) {
 
     // elements
     const taskPara = <p
-        className="text-[#001c58] text-xl inline"
+        className="text-[#001c58] text-2xl md:text-xl inline"
         style={{ textDecoration: isChecked ? "line-through" : "none" }}
     >
         {taskName}
     </p>
 
     const editField = <input
-        className='outline-0' 
+        className='outline-0 inline-block w-[80%] md:w-auto md:h-auto' 
         type="text" 
         autoFocus={true}
         onKeyDown={(event) => {
@@ -73,7 +73,7 @@ function Task(props) {
                     {isEditing ? editField : taskPara}
                     
                 </div>
-                <div id="actions">
+                <div className='min-w-[35%] md:min-w-0' id="actions">
                     <FontAwesomeIcon
                         className='w-10 h-10 px-5' 
                         size='lg' 
