@@ -19,9 +19,9 @@ function QuizApp() {
         addTask(val);
     }
 
-    function onTaskDelete(name) {
-        setTasks((t) => t.filter((val, i) => val !== name));
-        deleteTask(name)
+    async function onTaskDelete(_ele,name) {
+        await deleteTask(name)
+        setTasks(await getTasks());
     }
 
     function getEditedName(taskName, editedName,isChecked) {
