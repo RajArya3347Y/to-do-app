@@ -1,8 +1,12 @@
 import axios from "axios";
 
+const api = axios.create({
+    baseURL: "/api"
+})
+
 async function getTasks() {
     try {
-        const response = await axios.get("/api",);
+        const response = await api.get("/",);
         const data = response.data.map(task => task.title);
         return data
     } catch (error) {
@@ -12,7 +16,7 @@ async function getTasks() {
 
 async function getIsCompleted(title) {
     try {
-        const response = await axios.get(`/api/${title}`)
+        const response = await api.get(`/${title}`)
         const data = response.data[0].isCompleted
         return data
     } catch (error) {
@@ -22,8 +26,7 @@ async function getIsCompleted(title) {
 
 async function addTask(title) {
     try {
-        await axios.post(`/api/${title}`);
-        await getTasks()
+        await api.post(`/${title}`);
     } catch (error) {
         console.log(error);
     }
@@ -31,8 +34,7 @@ async function addTask(title) {
 
 async function editTask(title, updatedTitle, isCompleted) {
     try {
-        await axios.patch(`/api/${title}`,{newTitle:updatedTitle,isCompleted:isCompleted})
-        await getTasks();
+        await api.patch(`/${title}`,{newTitle:updatedTitle,isCompleted:isCompleted})
     } catch (error) {
         console.log(error);
     }
@@ -40,8 +42,7 @@ async function editTask(title, updatedTitle, isCompleted) {
 
 async function deleteTask(title) {
     try {
-        await axios.delete(`/api/${title}`);
-        await getTasks();
+        await api.delete(`/${title}`);
     } catch (error) {
         console.log(error);
     }
