@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import { editTask, getIsCompleted, getTasks } from '../api/api';
+import { editTask, getIsCompleted, } from '../api/api';
 
 
 function Task(props) {
