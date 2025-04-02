@@ -1,13 +1,13 @@
 const userModel = require("../models/user.js")
 
-async function signup(req,res,){
+async function signup(req, res,) {
     username = req.body.username;
     password = req.body.password
-    
+
     try {
         const user = new userModel({
-            username:username,
-            password:password
+            username: username,
+            password: password
         })
         await user.save(user)
         res.end()
@@ -15,23 +15,30 @@ async function signup(req,res,){
     } catch (error) {
         message = error.message
         res.status(404)
-        res.json({message})
+        res.json({ message })
     }
 }
 
-async function login(req,res,) {
+async function login(req, res,) {
     
+
     username = req.body.username;
     password = req.body.password
 
+
     try {
-        const user = await userModel.find({username})
-        res.json(user)
+        const user = await userModel.findOne({ username })
+        if (password === user.password) {
+            res.json({message:"User authenticated"})
+        } else {
+            res.status(404)
+            res.json({ message: "Incorrect Password" })
+        }
     } catch (error) {
-        error.message
+        message = error.message
         res.status(404)
-        res.json({message})
+        res.json({ message })
     }
 }
 
-module.exports = {login,signup}
+module.exports = { login, signup }
