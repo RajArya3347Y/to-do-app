@@ -1,15 +1,14 @@
-const express = require("express")
-require("dotenv").config()
+const config = require("./config/env.js")
 
-const PORT = process.env.PORT
+const app = require("./app.js")
 
-const app = express();
 
-const toDoAppRoute = require("./routes/appRoute")
-const dbRoute = require("./routes/dbRoute")
+const PORT = config.PORT
 
-app.use("/",toDoAppRoute);
-app.use("/api",dbRoute)
+
+const connectDB = require("./config/connectDB.js")
+const DATABASE_URL = config.DATABASE_URL;
+connectDB(DATABASE_URL)
 
 app.listen(PORT,(err) => {
     console.log("Server is running at port 8000")

@@ -4,9 +4,6 @@ require("dotenv").config()
 const router = express.Router();
 
 // DB
-const connectDB = require("../database/connectDB")
-const DATABASE_URL = process.env.DATABASE_URL;
-connectDB(DATABASE_URL)
 
 const {addTask,getTasks,deleteTask,updateTask, getIsCompleted} = require('../controllers/todoController')
 
