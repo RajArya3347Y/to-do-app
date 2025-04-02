@@ -28,11 +28,17 @@ async function login(req, res,) {
 
     try {
         const user = await userModel.findOne({ username })
-        if (password === user.password) {
-            res.json({message:"User authenticated"})
-        } else {
+        if(user){
+            if (password === user.password) {
+                res.json({message:"User authenticated"})
+            } else {
+                res.status(404)
+                res.json({ message: "Incorrect Password" })
+            }
+        }
+        else{
             res.status(404)
-            res.json({ message: "Incorrect Password" })
+            res.json({message:"User not found"})
         }
     } catch (error) {
         message = error.message
