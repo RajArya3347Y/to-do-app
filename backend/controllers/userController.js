@@ -1,16 +1,25 @@
-const userModel = require("../models/user.js")
+const bcrypt = require("bcrypt");
+
+const saltRounds = require("../config/env.js").SALT_ROUNDS
+
+const userModel = require("../models/user.js");
 
 async function signup(req, res,) {
     username = req.body.username;
     password = req.body.password
+    
 
     try {
+        // Password Hasing
+        const hashedPassword = await bcrypt.hash(password,saltRounds)
         const user = new userModel({
             username: username,
-            password: password
+            password: hashedPassword
         })
         await user.save(user)
+        
         res.end()
+        
 
     } catch (error) {
         message = error.message
@@ -21,30 +30,6 @@ async function signup(req, res,) {
 
 async function login(req, res,) {
     
-
-    username = req.body.username;
-    password = req.body.password
-
-
-    try {
-        const user = await userModel.findOne({ username })
-        if(user){
-            if (password === user.password) {
-                res.json({message:"User authenticated"})
-            } else {
-                res.status(404)
-                res.json({ message: "Incorrect Password" })
-            }
-        }
-        else{
-            res.status(404)
-            res.json({message:"User not found"})
-        }
-    } catch (error) {
-        message = error.message
-        res.status(404)
-        res.json({ message })
-    }
 }
 
 module.exports = { login, signup }

@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     username: { 
         type: String, 
         required: true, 
-        unique: [true,"The username already exists"], 
+        unique: [true,"The account already already exists, try loging in"], 
         trim: true 
     },
     password: { 
