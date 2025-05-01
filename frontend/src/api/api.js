@@ -23,7 +23,7 @@ async function getIsCompleted(title) {
 async function addTask(title) {
     try {
         await axios.post(`/api/${title}`);
-        await getTasks()
+        return getTasks
     } catch (error) {
         console.log(error);
     }
@@ -32,7 +32,7 @@ async function addTask(title) {
 async function editTask(title, updatedTitle, isCompleted) {
     try {
         await axios.patch(`/api/${title}`,{newTitle:updatedTitle,isCompleted:isCompleted})
-        await getTasks();
+        return getTasks;
     } catch (error) {
         console.log(error);
     }
@@ -41,7 +41,7 @@ async function editTask(title, updatedTitle, isCompleted) {
 async function deleteTask(title) {
     try {
         await axios.delete(`/api/${title}`);
-        await getTasks();
+        return getTasks;
     } catch (error) {
         console.log(error);
     }
